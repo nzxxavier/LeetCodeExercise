@@ -79,4 +79,29 @@ public class IntegerSolution {
         }
         return res;
     }
+
+    public static int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int min_sub = Integer.MAX_VALUE;
+        int res = 0;
+        for(int k = 0; k < nums.length - 2; k ++){
+            int i = k + 1; int j = nums.length - 1;
+            while (i < j) {
+                int sum = nums[k] + nums[i] + nums[j];
+                int sub = sum - target;
+                if (sub == 0)
+                    return target;
+                if (Math.abs(sub) < min_sub) {
+                    min_sub = Math.abs(sub);
+                    res = sum;
+                }
+                if (sub > 0) {
+                    j--;
+                } else {
+                    i++;
+                }
+            }
+        }
+        return res;
+    }
 }

@@ -1,6 +1,6 @@
 public class main {
     public static void main(String[] args) {
-        String s = "III";
-        System.out.println(IntegerSolution.romanToInt(s));
+        int[] nums = {2, 3, 1, 0, 2, 5, 3};
+        System.out.println(JianZhiSolution.findRepeatNumber(nums));
     }
 }
