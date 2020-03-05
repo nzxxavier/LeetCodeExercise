@@ -1,8 +1,12 @@
+import com.sun.org.apache.xalan.internal.xsltc.dom.SingleNodeCounter;
+import sun.reflect.generics.tree.Tree;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 public class JianZhiSolution {
+    static int preCount = 0;
     public static int findRepeatNumber(int[] nums) {
         int[] mem = new int[nums.length];
         for (int i:mem) {
@@ -70,5 +74,54 @@ public class JianZhiSolution {
         }
 
         return res;
+    }
+
+    public static TreeNode buildTree(int[] preorder, int[] inorder) {
+        int inCount = 0;
+        while (inorder[inCount] != preorder[preCount])
+            inCount ++;
+        TreeNode root = new TreeNode(preorder[preCount]);
+        preCount ++;
+        TreeNode left = buileTree(preorder, inorder, 0, inCount - 1);
+        if (left != null) {
+            root.left = left;
+        }
+        TreeNode right = buileTree(preorder, inorder, inCount + 1, inorder.length - 1);;
+        if (right != null) {
+            root.right = right;
+        }
+        return root;
+    }
+
+    private static TreeNode buileTree(int[] preorder, int[] inorder, int inStart, int inEnd) {
+        int inCount = inStart;
+        if (preCount == preorder.length)
+            return null;
+        if (inStart == inEnd) {
+            TreeNode node = new TreeNode(preorder[preCount]);
+            preCount ++;
+            return node;
+        }
+        if (inStart < inEnd) {
+            TreeNode node = new TreeNode(preorder[preCount]);
+            while (inorder[inCount] != preorder[preCount]) {
+                inCount++;
+                if (inCount > inEnd) {
+                    return null;
+                }
+            }
+            preCount ++;
+            TreeNode left = buileTree(preorder, inorder, inStart, inCount - 1);
+            if (left != null) {
+                node.left = left;
+            }
+            TreeNode right = buileTree(preorder, inorder, inCount + 1, inEnd);
+            if (right != null) {
+                node.right = right;
+            }
+            return node;
+        }
+        else
+            return null;
     }
 }
