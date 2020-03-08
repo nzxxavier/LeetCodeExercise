@@ -4,6 +4,6 @@ public class main {
         //int[][] num1 = {{}};
         //System.out.println(JianZhiSolution.findNumberIn2DArray(nums, 5));
         char[][] board = {{'a','b','c','e'}, {'s','f','c','s'}, {'a','d','e','e'}};
-        System.out.println(JianZhiSolution.exist(board,"abcced"));
+        System.out.println(JianZhiSolution.movingCount(3,1,0));
     }
 }

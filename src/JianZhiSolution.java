@@ -1,3 +1,8 @@
+import com.sun.javafx.collections.MappingChange;
+
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Stack;
 
 public class JianZhiSolution {
@@ -167,6 +172,33 @@ public class JianZhiSolution {
                 dfs(board, word, i, j + 1, k + 1) ||
                 dfs(board, word, i , j - 1, k + 1);
         board[i][j] = tmp;
+        return res;
+    }
+
+    public static int movingCount(int m, int n, int k) {
+        boolean[][] visited = new boolean[m][n];
+        int res = 0;
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[] {0,0});
+        while (queue.size() > 0) {
+            int[] x = queue.poll();
+            int i = x[0];
+            int j = x[1];
+            if (i < 0 || i >= m || j < 0 || j >= n || calDigit(i) + calDigit(j) > k || visited[i][j]) continue;
+            visited[i][j] = true;
+            res ++;
+            queue.add(new int[] {i + 1, j});
+            queue.add(new int[] {i, j + 1});
+        }
+        return res;
+    }
+
+    private static int calDigit(int num) { // 数位和计算可优化
+        int res = 0;
+        while(num != 0) {
+            res += num % 10;
+            num /= 10;
+        }
         return res;
     }
 }
