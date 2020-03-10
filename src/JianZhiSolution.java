@@ -201,4 +201,50 @@ public class JianZhiSolution {
         }
         return res;
     }
+
+    public static int cuttingRope_1(int n) {
+        if(n <= 3) return n - 1;
+        int a = n / 3, b = n % 3;
+        if(b == 0) return (int)Math.pow(3, a);
+        if(b == 1) return (int)Math.pow(3, a - 1) * 4;
+        return (int)Math.pow(3, a) * 2;
+    }
+
+    public static int cuttingRope_2(int n) {
+        if(n <= 3) return n - 1;
+        int b = n % 3, p = 1000000007;
+        long rem = 1, x = 3;
+        for(int a = n / 3 - 1; a > 0; a /= 2) {
+            if(a % 2 == 1) rem = (rem * x) % p;
+            x = (x * x) % p;
+        }
+        if(b == 0) return (int)(rem * 3 % p);
+        if(b == 1) return (int)(rem * 4 % p);
+        return (int)(rem * 6 % p);
+    }
+
+    public int hammingWeight(int n) {
+        int res = 0;
+        while(n != 0) {
+            res += n & 1;
+            n >>>= 1;
+        }
+        return res;
+    }
+
+    public static double myPow(double x, int n) {
+        if(x == 0) return 0;
+        long b = n;
+        double res = 1.0;
+        if(b < 0) {
+            x = 1 / x;
+            b = -b;
+        }
+        while(b > 0) {
+            if((b & 1) == 1) res *= x;
+            x *= x;
+            b >>= 1;
+        }
+        return res;
+    }
 }
