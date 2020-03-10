@@ -256,4 +256,22 @@ public class JianZhiSolution {
         }
         return res;
     }
+
+    public static ListNode deleteNode(ListNode head, int val) {
+        if (head.val == val)
+            head = head.next;
+        ListNode node = head.next;
+        ListNode last = head;
+        while (node != null) {
+            if (node.val == val) {
+                last.next = node.next;
+                node = last.next;
+            }
+            else {
+                last = node;
+                node = node.next;
+            }
+        }
+        return head;
+    }
 }
